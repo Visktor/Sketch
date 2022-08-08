@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:20px;
+}
+
+.outer-container {
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 50%;
+    height: 50%;
+    background-color: azure;
+}
+
+.inner-div {
+    background-color: antiquewhite;
+}
+
+.red{
+    background-color: red;
+}
+
+.popup{
+    width: max(80px, 10vw);
+    font-size: min(1rem, 4vw);
+    padding: 5px;
+    border-radius: 0;
+    background-color: skyblue;
+}
