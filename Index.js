@@ -11,14 +11,12 @@ for (i = 1; i <= placeholderValue; i++) {
 }
 
 const innerall = document.querySelectorAll(".inner-div");
-/*
 innerall.forEach((innerdiv) => {
   innerdiv.addEventListener(
     "mouseover",
-    () => (innerdiv.style.backgroundColor = bgColor)
+    () => (innerdiv.style.backgroundColor = "red")
   );
 });
-*/
 
 let children = outer.childNodes;
 popup.addEventListener("click", () => {
@@ -38,18 +36,17 @@ popup.addEventListener("click", () => {
     for (i = 1; i <= placeholderValue; i++) {
       outer.appendChild(inner.cloneNode(true));
     } // creating new ones.
+
     const innerall = document.querySelectorAll(".inner-div");
     innerall.forEach((innerdiv) => {
-      innerdiv.addEventListener(
-        "mouseover",
-        () => (innerdiv.style.backgroundColor = "red")
-      );
+      innerdiv.addEventListener("mouseover", function bgRed() {
+        innerdiv.style.backgroundColor = "red";
+      });
     });
   } //adding eventlisteners to the new ones.
 });
 
-//generate random hex value:
-rainbutton.addEventListener("click", () => {
+function createColor(element) {
   let randomColorString = "#";
   const arrayOfColorFunctions = [
     "0",
@@ -69,17 +66,25 @@ rainbutton.addEventListener("click", () => {
     "e",
     "f",
   ];
-  console.log(randomColorString);
-
-  innerall.forEach((innerdiv) => {
+  element.forEach((innerdiv) => {
     innerdiv.addEventListener("mouseover", () => {
       for (let x = 0; x < 6; x++) {
         let index = Math.floor(Math.random() * 15);
         let value = arrayOfColorFunctions[index];
 
         randomColorString += value;
-        innerdiv.style.backgroundColor = randomColorString;
+      }
+      console.log(randomColorString);
+      innerdiv.style.backgroundColor = randomColorString;
+      if (randomColorString.length >= 7) {
+        randomColorString = "#";
       }
     });
   });
+}
+
+//generate random hex value:
+rainbutton.addEventListener("click", () => {
+  const innerall = document.querySelectorAll(".inner-div");
+  createColor(innerall);
 });
