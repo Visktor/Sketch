@@ -1,20 +1,27 @@
 const outer = document.querySelector(".outer-container");
 const inner = document.createElement("div");
+const rainbutton = document.querySelector(".rainbow-mode");
 inner.classList.add("inner-div");
-
 const popup = document.querySelector("button");
 let placeholderValue = 16;
+let bgColor = "red";
+
 for (i = 1; i <= placeholderValue; i++) {
   outer.appendChild(inner.cloneNode(true));
 }
 
 const innerall = document.querySelectorAll(".inner-div");
+/*
 innerall.forEach((innerdiv) => {
-  innerdiv.addEventListener("mouseover", () => innerdiv.classList.add("red"));
+  innerdiv.addEventListener(
+    "mouseover",
+    () => (innerdiv.style.backgroundColor = bgColor)
+  );
 });
+*/
 
+let children = outer.childNodes;
 popup.addEventListener("click", () => {
-  let children = outer.childNodes;
   let total = children.length;
   for (x = 0; x < total; x++) {
     outer.removeChild(children[0]);
@@ -33,27 +40,46 @@ popup.addEventListener("click", () => {
     } // creating new ones.
     const innerall = document.querySelectorAll(".inner-div");
     innerall.forEach((innerdiv) => {
-      innerdiv.addEventListener("mouseover", () =>
-        innerdiv.classList.add("red")
+      innerdiv.addEventListener(
+        "mouseover",
+        () => (innerdiv.style.backgroundColor = "red")
       );
     });
   } //adding eventlisteners to the new ones.
 });
 
-
 //generate random hex value:
-function genHexValue(){
-const arrayOfColorFunctions = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f']
+rainbutton.addEventListener("click", () => {
+  let randomColorString = "#";
+  const arrayOfColorFunctions = [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+  ];
+  console.log(randomColorString);
 
-let randomColorString = '#';
-() => {
+  innerall.forEach((innerdiv) => {
+    innerdiv.addEventListener("mouseover", () => {
+      for (let x = 0; x < 6; x++) {
+        let index = Math.floor(Math.random() * 15);
+        let value = arrayOfColorFunctions[index];
 
-for (let x = 0; x < 6; x++){
-
-    let index = Math.floor(Math.random() * 16)
-    let value = arrayOfColorFunctions[index]
-
-    randomColorString += value
-}
- return randomColorString;
-}}
+        randomColorString += value;
+        innerdiv.style.backgroundColor = randomColorString;
+      }
+    });
+  });
+});
