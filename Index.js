@@ -3,31 +3,46 @@ const inner = document.createElement("div");
 const rainbutton = document.querySelector(".rainbow-mode");
 inner.classList.add("inner-div");
 const popup = document.querySelector("button");
+const cancel = document.querySelector(".cancel");
+const shadow = document.querySelector(".shadow");
 let placeholderValue = 16;
-let bgColor = "red";
 
 for (i = 1; i <= placeholderValue; i++) {
   outer.appendChild(inner.cloneNode(true));
 }
 
 const innerall = document.querySelectorAll(".inner-div");
-innerall.forEach((innerdiv) => {
-  innerdiv.addEventListener(
-    "mouseover",
-    () => (innerdiv.style.backgroundColor = "red")
-  );
+function redColor(element){
+  element.style.backgroundColor = "red";
+}
+
+cancel.addEventListener("click", () => {
+  innerall.forEach((innerdiv) => {
+    innerdiv.addEventListener("mouseover", function redColor() {
+      innerdiv.style.backgroundColor = "red";
+      console.log("test")
+    });
+  });
+});
+
+shadow.addEventListener("click", () => {
+  innerall.forEach((innerdiv) => {
+    innerdiv.addEventListener("mouseover", () => {
+      console.log(innerdiv.style.backgroundColor);
+    });
+  });
 });
 
 let children = outer.childNodes;
 popup.addEventListener("click", () => {
   let total = children.length;
-  for (x = 0; x < total; x++) {
-    outer.removeChild(children[0]);
-  } // removing all the previous children elements.
   let userChoice = prompt("What size will the sketch be? (max 100) - ");
   if (userChoice > 100) {
     return alert("Can't compute values over 100.");
   } else {
+    for (x = 0; x < total; x++) {
+      outer.removeChild(children[0]);
+    } // removing all the previous children elements.
     placeholderValue = userChoice ** 2; // the value² that will constitute our grid squares.
     outer.style.gridTemplateColumns = `repeat(${userChoice}, 1fr)`; // The ammount of columns.
     children.forEach((innerdiv) => {
