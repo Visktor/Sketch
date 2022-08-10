@@ -13,7 +13,12 @@
     <button class="popup">Canvas Size</button>
     <div class="modes">
         <button class="eraser">Eraser</button>
-        <button class="rainbow-mode">Rainbow (HSL)</button>
+        <select name="rainbow-type" id="rainbow-dropdown">
+            <option value="">Rainbow</option>
+            <option class="rainbow-mode" value="HSL">HSL</option>
+            <option class="rainbowrgb" value="RGB">RGB</option>
+            <option class="rainbowhex" value="HEX">HEX</option>
+        </select>
         <button class="shadow">Shadow</button>
         <button class="cancel">Default</button>
     </div>
