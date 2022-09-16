@@ -5,31 +5,20 @@ inner.classList.add("inner-div");
 const popup = document.querySelector("button");
 const cancel = document.querySelector(".cancel");
 const shadow = document.querySelector(".shadow");
-let placeholderValue = 16;
+const innerDivs = document.querySelectorAll(".inner-div");
+let gridSize = 16;
 
-for (i = 1; i <= placeholderValue; i++) {
-  outer.appendChild(inner.cloneNode(true));
+for (i = 1; i <= gridSize; i++) {
+  outer.appendChild(inner.cloneNode(true)); // Deep cloning here for some godforsaken reason.
 }
 
-const innerall = document.querySelectorAll(".inner-div");
-function redColor(element){
-  element.style.backgroundColor = "red";
+function setRedBG() {
+  this.style.backgroundColor = "red";
 }
 
 cancel.addEventListener("click", () => {
-  innerall.forEach((innerdiv) => {
-    innerdiv.addEventListener("mouseover", function redColor() {
-      innerdiv.style.backgroundColor = "red";
-      console.log("test")
-    });
-  });
-});
-
-shadow.addEventListener("click", () => {
-  innerall.forEach((innerdiv) => {
-    innerdiv.addEventListener("mouseover", () => {
-      console.log(innerdiv.style.backgroundColor);
-    });
+  innerDivs.forEach((innerdiv) => {
+    innerdiv.addEventListener("mouseover", setRedBG);
   });
 });
 
@@ -43,17 +32,17 @@ popup.addEventListener("click", () => {
     for (x = 0; x < total; x++) {
       outer.removeChild(children[0]);
     } // removing all the previous children elements.
-    placeholderValue = userChoice ** 2; // the value² that will constitute our grid squares.
+    gridSize = userChoice ** 2; // the value² that will constitute our grid squares.
     outer.style.gridTemplateColumns = `repeat(${userChoice}, 1fr)`; // The ammount of columns.
     children.forEach((innerdiv) => {
       outer.removeChild(innerdiv);
     }); // removing the previous divs.
-    for (i = 1; i <= placeholderValue; i++) {
+    for (i = 1; i <= gridSize; i++) {
       outer.appendChild(inner.cloneNode(true));
     } // creating new ones.
 
-    const innerall = document.querySelectorAll(".inner-div");
-    innerall.forEach((innerdiv) => {
+    const innerDivs = document.querySelectorAll(".inner-div");
+    innerDivs.forEach((innerdiv) => {
       innerdiv.addEventListener("mouseover", function bgRed() {
         innerdiv.style.backgroundColor = "red";
       });
@@ -100,6 +89,6 @@ function createColor(element) {
 
 //generate random hex value:
 rainbutton.addEventListener("click", () => {
-  const innerall = document.querySelectorAll(".inner-div");
-  createColor(innerall);
+  const innerDivs = document.querySelectorAll(".inner-div");
+  createColor(innerDivs);
 });
